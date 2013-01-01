@@ -16,6 +16,10 @@
 		E05E8DC2169295F90009A4EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E05E8DC1169295F90009A4EF /* Default.png */; };
 		E05E8DC4169295F90009A4EF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E05E8DC3169295F90009A4EF /* Default@2x.png */; };
 		E05E8DC6169295F90009A4EF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E05E8DC5169295F90009A4EF /* Default-568h@2x.png */; };
+		E05E8DCF1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DCE1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m */; };
+		E05E8DD21692F9760009A4EF /* NSUserDefaults+KissDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */; };
+		E05E8DD616930A800009A4EF /* KNDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DD516930A800009A4EF /* KNDemoViewController.m */; };
+		E05E8DD81693254F0009A4EF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E05E8DD71693254F0009A4EF /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,13 @@
 		E05E8DC1169295F90009A4EF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		E05E8DC3169295F90009A4EF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		E05E8DC5169295F90009A4EF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E05E8DCD1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+KissNSUserDefaults.h"; sourceTree = "<group>"; };
+		E05E8DCE1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+KissNSUserDefaults.m"; sourceTree = "<group>"; };
+		E05E8DD01692F9760009A4EF /* NSUserDefaults+KissDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+KissDemo.h"; sourceTree = "<group>"; };
+		E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+KissDemo.m"; sourceTree = "<group>"; };
+		E05E8DD416930A800009A4EF /* KNDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNDemoViewController.h; sourceTree = "<group>"; };
+		E05E8DD516930A800009A4EF /* KNDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNDemoViewController.m; sourceTree = "<group>"; };
+		E05E8DD71693254F0009A4EF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +62,8 @@
 		E05E8DA0169295F90009A4EF = {
 			isa = PBXGroup;
 			children = (
-				E05E8DB5169295F90009A4EF /* KissNSUserDefaults */,
+				E05E8DD31692F9800009A4EF /* KissNSUserDefaults */,
+				E05E8DB5169295F90009A4EF /* KissNSUserDefaultsDemo */,
 				E05E8DAE169295F90009A4EF /* Frameworks */,
 				E05E8DAC169295F90009A4EF /* Products */,
 			);
@@ -75,13 +87,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E05E8DB5169295F90009A4EF /* KissNSUserDefaults */ = {
+		E05E8DB5169295F90009A4EF /* KissNSUserDefaultsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E05E8DD01692F9760009A4EF /* NSUserDefaults+KissDemo.h */,
+				E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */,
 				E05E8DBE169295F90009A4EF /* KNAppDelegate.h */,
 				E05E8DBF169295F90009A4EF /* KNAppDelegate.m */,
+				E05E8DD416930A800009A4EF /* KNDemoViewController.h */,
+				E05E8DD516930A800009A4EF /* KNDemoViewController.m */,
 				E05E8DB6169295F90009A4EF /* Supporting Files */,
 			);
+			name = KissNSUserDefaultsDemo;
 			path = KissNSUserDefaults;
 			sourceTree = "<group>";
 		};
@@ -95,8 +112,18 @@
 				E05E8DC1169295F90009A4EF /* Default.png */,
 				E05E8DC3169295F90009A4EF /* Default@2x.png */,
 				E05E8DC5169295F90009A4EF /* Default-568h@2x.png */,
+				E05E8DD71693254F0009A4EF /* README.md */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E05E8DD31692F9800009A4EF /* KissNSUserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				E05E8DCD1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.h */,
+				E05E8DCE1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m */,
+			);
+			path = KissNSUserDefaults;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +182,7 @@
 				E05E8DC2169295F90009A4EF /* Default.png in Resources */,
 				E05E8DC4169295F90009A4EF /* Default@2x.png in Resources */,
 				E05E8DC6169295F90009A4EF /* Default-568h@2x.png in Resources */,
+				E05E8DD81693254F0009A4EF /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +195,9 @@
 			files = (
 				E05E8DBC169295F90009A4EF /* main.m in Sources */,
 				E05E8DC0169295F90009A4EF /* KNAppDelegate.m in Sources */,
+				E05E8DCF1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m in Sources */,
+				E05E8DD21692F9760009A4EF /* NSUserDefaults+KissDemo.m in Sources */,
+				E05E8DD616930A800009A4EF /* KNDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
