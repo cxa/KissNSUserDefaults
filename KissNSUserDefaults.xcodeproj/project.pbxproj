@@ -19,7 +19,6 @@
 		E05E8DCF1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DCE1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m */; };
 		E05E8DD21692F9760009A4EF /* NSUserDefaults+KissDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */; };
 		E05E8DD616930A800009A4EF /* KNDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DD516930A800009A4EF /* KNDemoViewController.m */; };
-		E05E8DD81693254F0009A4EF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E05E8DD71693254F0009A4EF /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +41,6 @@
 		E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+KissDemo.m"; sourceTree = "<group>"; };
 		E05E8DD416930A800009A4EF /* KNDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNDemoViewController.h; sourceTree = "<group>"; };
 		E05E8DD516930A800009A4EF /* KNDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNDemoViewController.m; sourceTree = "<group>"; };
-		E05E8DD71693254F0009A4EF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +110,6 @@
 				E05E8DC1169295F90009A4EF /* Default.png */,
 				E05E8DC3169295F90009A4EF /* Default@2x.png */,
 				E05E8DC5169295F90009A4EF /* Default-568h@2x.png */,
-				E05E8DD71693254F0009A4EF /* README.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -182,7 +179,6 @@
 				E05E8DC2169295F90009A4EF /* Default.png in Resources */,
 				E05E8DC4169295F90009A4EF /* Default@2x.png in Resources */,
 				E05E8DC6169295F90009A4EF /* Default-568h@2x.png in Resources */,
-				E05E8DD81693254F0009A4EF /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
