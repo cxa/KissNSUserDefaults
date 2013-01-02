@@ -12,6 +12,37 @@ This is what `KissNSUserDefaults` project borns to be. Demo tells all.
 
 Drag `NSUserDefaults+KissNSUserDefaults.(h|m)` into your project. Make your own `NSUserDefaults` category, import `NSUserDefaults+KissNSUserDefaults.h` and run `-kiss_setup` in your category's `+load`. See `NSUserDefaults+KissDemo.(h|m)` in demo project for details. 
 
+### `NSUserDefaults+KissDemo.h`
+
+	#import "NSUserDefaults+KissNSUserDefaults.h"
+
+	@interface NSUserDefaults (KissDemo)
+
+	// KissNSUserDefaults currently supports NSObject, NSInteger, float and BOOL types
+	@property (nonatomic, strong) NSString *string;
+	@property (nonatomic) NSInteger integer;
+	@property (nonatomic) CGFloat floatValue;
+	@property (nonatomic) BOOL boolValue;
+
+	@end
+	
+### `NSUserDefaults+KissDemo.m`
+
+	#import "NSUserDefaults+KissDemo.h"
+
+	@implementation NSUserDefaults (KissDemo)
+	
+	// KissNSUserDefaults will generate all accessors for you
+	@dynamic string, integer, floatValue, boolValue;
+
+	+ (void)load
+	{
+  	  [self kiss_setup];
+	}
+
+	@end
+	
+
 ## License
 
 The BSD 2-Clause License
