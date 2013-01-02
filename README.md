@@ -6,7 +6,11 @@ Keep it simple, stupid!
 
 Directly hard code NSString as key is not a good programming practise. Make a `NSUserDefaults` category to  contain some properties may be a better way. And it's a bonus if we know which key has changed.
 
-This is what `KissNSUserDefaults` project born to be. Demo tells all.
+This is what `KissNSUserDefaults` project borns to be. Demo tells all.
+
+## Usage
+
+Drag `NSUserDefaults+KissNSUserDefaults.(h|m)` into your project. Make your own `NSUserDefaults` category, import `NSUserDefaults+KissNSUserDefaults.h` and run `-kiss_setup` in your category's `+load`. See `NSUserDefaults+KissDemo.(h|m)` in demo project for details. 
 
 ## License
 
@@ -14,7 +18,7 @@ The BSD 2-Clause License
 
 * * * 
 
-Copyright (c) 2013 CHEN Xian'an <xianan.chen@gmail.com>.
+Copyright (c) 2013 CHEN Xian'an <xianan.chen@gmail.com>.  
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
