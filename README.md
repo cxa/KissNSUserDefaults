@@ -2,15 +2,15 @@
 
 Keep it simple, stupid!
 
-`NSUSerDefaults` is boring and painful because that `NSUserDefaultsDidChangeNotification` contains no `userInfo`.
+Directly hard code to access keys of `NSUSerDefaults` is very boring, and painful because `NSUserDefaultsDidChangeNotification` contains no `userInfo`.
 
-Directly hard code NSString as key is not a good programming practise. Make a `NSUserDefaults` category to  contain some properties may be a better way. And it's a bonus if we know which key has changed.
+Make a `NSUserDefaults` category to contain properties is a better way. And it's a bonus if we know which key has changed.
 
-This is what `KissNSUserDefaults` project borns to be. Demo tells all.
+This is what `KissNSUserDefaults` project borns to be. What you need to do is to delcare properties in header and `@dynamic` all in implementation. `-kiss_setup` will generate all accessors for you. Demo tells all.
 
 ## Usage
 
-Drag `NSUserDefaults+KissNSUserDefaults.(h|m)` into your project. Make your own `NSUserDefaults` category, import `NSUserDefaults+KissNSUserDefaults.h` and run `-kiss_setup` in your category's `+load`. See `NSUserDefaults+KissDemo.(h|m)` in demo project for details. 
+Drag `NSUserDefaults+KissNSUserDefaults.(h|m)` into your project. Make your own `NSUserDefaults` category, import `NSUserDefaults+KissNSUserDefaults.h` and run `-kiss_setup` in your category's `+load`. See `NSUserDefaults+KissDemo.(h|m)` in demo project for details. And you can add an observer for `KissNSUserDefaultsDidChangeNotification` to listen changes.
 
 ### `NSUserDefaults+KissDemo.h`
 
