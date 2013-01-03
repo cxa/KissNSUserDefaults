@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E058E2101695BC34009A0BCE /* NSUserDefaults+KissNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = E058E1FD1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.m */; };
 		E05E8DB0169295F90009A4EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05E8DAF169295F90009A4EF /* UIKit.framework */; };
 		E05E8DB2169295F90009A4EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05E8DB1169295F90009A4EF /* Foundation.framework */; };
 		E05E8DB4169295F90009A4EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05E8DB3169295F90009A4EF /* CoreGraphics.framework */; };
@@ -16,12 +17,13 @@
 		E05E8DC2169295F90009A4EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E05E8DC1169295F90009A4EF /* Default.png */; };
 		E05E8DC4169295F90009A4EF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E05E8DC3169295F90009A4EF /* Default@2x.png */; };
 		E05E8DC6169295F90009A4EF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E05E8DC5169295F90009A4EF /* Default-568h@2x.png */; };
-		E05E8DCF1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DCE1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m */; };
 		E05E8DD21692F9760009A4EF /* NSUserDefaults+KissDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */; };
 		E05E8DD616930A800009A4EF /* KNDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DD516930A800009A4EF /* KNDemoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E058E1FC1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+KissNSUserDefaults.h"; sourceTree = SOURCE_ROOT; };
+		E058E1FD1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+KissNSUserDefaults.m"; sourceTree = SOURCE_ROOT; };
 		E05E8DAB169295F90009A4EF /* KissNSUserDefaults.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KissNSUserDefaults.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E05E8DAF169295F90009A4EF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E05E8DB1169295F90009A4EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -29,14 +31,12 @@
 		E05E8DB7169295F90009A4EF /* KissNSUserDefaults-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KissNSUserDefaults-Info.plist"; sourceTree = "<group>"; };
 		E05E8DB9169295F90009A4EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E05E8DBB169295F90009A4EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E05E8DBD169295F90009A4EF /* KissNSUserDefaults-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KissNSUserDefaults-Prefix.pch"; sourceTree = "<group>"; };
+		E05E8DBD169295F90009A4EF /* KissNSUserDefaultsDemo/KissNSUserDefaults-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KissNSUserDefaultsDemo/KissNSUserDefaults-Prefix.pch"; sourceTree = "<group>"; };
 		E05E8DBE169295F90009A4EF /* KNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNAppDelegate.h; sourceTree = "<group>"; };
 		E05E8DBF169295F90009A4EF /* KNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNAppDelegate.m; sourceTree = "<group>"; };
 		E05E8DC1169295F90009A4EF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		E05E8DC3169295F90009A4EF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		E05E8DC5169295F90009A4EF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		E05E8DCD1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+KissNSUserDefaults.h"; sourceTree = "<group>"; };
-		E05E8DCE1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+KissNSUserDefaults.m"; sourceTree = "<group>"; };
 		E05E8DD01692F9760009A4EF /* NSUserDefaults+KissDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+KissDemo.h"; sourceTree = "<group>"; };
 		E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+KissDemo.m"; sourceTree = "<group>"; };
 		E05E8DD416930A800009A4EF /* KNDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNDemoViewController.h; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 		E05E8DA0169295F90009A4EF = {
 			isa = PBXGroup;
 			children = (
-				E05E8DD31692F9800009A4EF /* KissNSUserDefaults */,
+				E05E8DD31692F9800009A4EF /* KissNSUserDefaultsDemo */,
 				E05E8DB5169295F90009A4EF /* KissNSUserDefaultsDemo */,
 				E05E8DAE169295F90009A4EF /* Frameworks */,
 				E05E8DAC169295F90009A4EF /* Products */,
@@ -88,16 +88,15 @@
 		E05E8DB5169295F90009A4EF /* KissNSUserDefaultsDemo */ = {
 			isa = PBXGroup;
 			children = (
-				E05E8DD01692F9760009A4EF /* NSUserDefaults+KissDemo.h */,
-				E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */,
 				E05E8DBE169295F90009A4EF /* KNAppDelegate.h */,
 				E05E8DBF169295F90009A4EF /* KNAppDelegate.m */,
+				E05E8DD01692F9760009A4EF /* NSUserDefaults+KissDemo.h */,
+				E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */,
 				E05E8DD416930A800009A4EF /* KNDemoViewController.h */,
 				E05E8DD516930A800009A4EF /* KNDemoViewController.m */,
 				E05E8DB6169295F90009A4EF /* Supporting Files */,
 			);
-			name = KissNSUserDefaultsDemo;
-			path = KissNSUserDefaults;
+			path = KissNSUserDefaultsDemo;
 			sourceTree = "<group>";
 		};
 		E05E8DB6169295F90009A4EF /* Supporting Files */ = {
@@ -106,7 +105,7 @@
 				E05E8DB7169295F90009A4EF /* KissNSUserDefaults-Info.plist */,
 				E05E8DB8169295F90009A4EF /* InfoPlist.strings */,
 				E05E8DBB169295F90009A4EF /* main.m */,
-				E05E8DBD169295F90009A4EF /* KissNSUserDefaults-Prefix.pch */,
+				E05E8DBD169295F90009A4EF /* KissNSUserDefaultsDemo/KissNSUserDefaults-Prefix.pch */,
 				E05E8DC1169295F90009A4EF /* Default.png */,
 				E05E8DC3169295F90009A4EF /* Default@2x.png */,
 				E05E8DC5169295F90009A4EF /* Default-568h@2x.png */,
@@ -114,13 +113,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E05E8DD31692F9800009A4EF /* KissNSUserDefaults */ = {
+		E05E8DD31692F9800009A4EF /* KissNSUserDefaultsDemo */ = {
 			isa = PBXGroup;
 			children = (
-				E05E8DCD1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.h */,
-				E05E8DCE1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m */,
+				E058E1FC1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.h */,
+				E058E1FD1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.m */,
 			);
-			path = KissNSUserDefaults;
+			path = KissNSUserDefaultsDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,7 +190,7 @@
 			files = (
 				E05E8DBC169295F90009A4EF /* main.m in Sources */,
 				E05E8DC0169295F90009A4EF /* KNAppDelegate.m in Sources */,
-				E05E8DCF1692967D0009A4EF /* NSUserDefaults+KissNSUserDefaults.m in Sources */,
+				E058E2101695BC34009A0BCE /* NSUserDefaults+KissNSUserDefaults.m in Sources */,
 				E05E8DD21692F9760009A4EF /* NSUserDefaults+KissDemo.m in Sources */,
 				E05E8DD616930A800009A4EF /* KNDemoViewController.m in Sources */,
 			);
@@ -267,8 +266,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KissNSUserDefaults/KissNSUserDefaults-Prefix.pch";
-				INFOPLIST_FILE = "KissNSUserDefaults/KissNSUserDefaults-Info.plist";
+				GCC_PREFIX_HEADER = "KissNSUserDefaultsDemo/KissNSUserDefaults-Prefix.pch";
+				INFOPLIST_FILE = "KissNSUserDefaultsDemo/KissNSUserDefaults-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -279,7 +278,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KissNSUserDefaults/KissNSUserDefaults-Prefix.pch";
-				INFOPLIST_FILE = "KissNSUserDefaults/KissNSUserDefaults-Info.plist";
+				INFOPLIST_FILE = "KissNSUserDefaultsDemo/KissNSUserDefaults-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -304,6 +303,7 @@
 				E05E8DCB169295F90009A4EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

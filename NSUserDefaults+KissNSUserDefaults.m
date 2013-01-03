@@ -96,7 +96,7 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
 }
 
 + (void)kiss_getDynamicProperties:(NSDictionary **)outGetters
-                          types:(NSDictionary **)outTypes
+                            types:(NSDictionary **)outTypes
 {
   NSMutableArray *properties = [@[] mutableCopy];
   NSMutableDictionary *getters = [@{} mutableCopy];
