@@ -4,13 +4,15 @@ Keep it simple, stupid!
 
 Directly hard code to access keys of `NSUSerDefaults` is very boring, and painful because `NSUserDefaultsDidChangeNotification` contains no `userInfo`.
 
-Make a `NSUserDefaults` category to contain properties is a better way. And it's a bonus if we know which key has changed.
+Make a `NSUserDefaults` category to contain some properties is a better way. And it's a bonus if we know which key has been changed.
 
-This is what `KissNSUserDefaults` project borns to be. What you need to do is to delcare properties in header and `@dynamic` all in implementation. `-kiss_setup` will generate all accessors for you. Demo tells all.
+This is what `KissNSUserDefaults` project borns to be. What you need to do is to delcare properties in header and `@dynamic` all in implementation. Run `+kiss_setup` in `+load` will generate all accessors for you. 
 
 ## Usage
 
-Drag `NSUserDefaults+KissNSUserDefaults.(h|m)` into your project. Make your own `NSUserDefaults` category, import `NSUserDefaults+KissNSUserDefaults.h` and run `-kiss_setup` in your category's `+load`. See `NSUserDefaults+KissDemo.(h|m)` in demo project for details. And you can add an observer for `KissNSUserDefaultsDidChangeNotification` to listen changes.
+Add `NSUserDefaults+KissNSUserDefaults.h` and `NSUserDefaults+KissNSUserDefaults.m` to your project. Make your own `NSUserDefaults` category, import `NSUserDefaults+KissNSUserDefaults.h` and run `+kiss_setup` in your category's `+load`. 
+
+Check `NSUserDefaults+KissDemo.(h|m)` in demo project for details. And you can add an observer for `KissNSUserDefaultsDidChangeNotification` to listen changes.
 
 ### `NSUserDefaults+KissDemo.h`
 
@@ -44,7 +46,9 @@ Drag `NSUserDefaults+KissNSUserDefaults.(h|m)` into your project. Make your own 
 		
 ## Creator
 
-[CHEN Xian'an](http://cxa.im) [@_cxa](https://twitter.com)
+* GitHub: [https://github.com/cxa/](https://github.com/cxa/)
+* Twitter: [@_cxa](https://twitter.com/_cxa)
+* Apps available in App Store: [http://lazyapps.com](http://lazyapps.com)
 
 ## License
 
