@@ -60,7 +60,7 @@
 		E05E8DA0169295F90009A4EF = {
 			isa = PBXGroup;
 			children = (
-				E05E8DD31692F9800009A4EF /* KissNSUserDefaultsDemo */,
+				E05E8DD31692F9800009A4EF /* KissNSUserDefaults */,
 				E05E8DB5169295F90009A4EF /* KissNSUserDefaultsDemo */,
 				E05E8DAE169295F90009A4EF /* Frameworks */,
 				E05E8DAC169295F90009A4EF /* Products */,
@@ -113,12 +113,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E05E8DD31692F9800009A4EF /* KissNSUserDefaultsDemo */ = {
+		E05E8DD31692F9800009A4EF /* KissNSUserDefaults */ = {
 			isa = PBXGroup;
 			children = (
 				E058E1FC1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.h */,
 				E058E1FD1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.m */,
 			);
+			name = KissNSUserDefaults;
 			path = KissNSUserDefaultsDemo;
 			sourceTree = "<group>";
 		};

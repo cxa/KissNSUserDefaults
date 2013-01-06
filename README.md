@@ -46,9 +46,9 @@ Check `NSUserDefaults+KissDemo.(h|m)` in demo project for details. And you can a
 		
 ## Creator
 
-* GitHub: [https://github.com/cxa/](https://github.com/cxa/)
+* GitHub: <https://github.com/cxa>
 * Twitter: [@_cxa](https://twitter.com/_cxa)
-* Apps available in App Store: [http://lazyapps.com](http://lazyapps.com)
+* Apps available in App Store: <http://lazyapps.com>
 
 ## License
 
