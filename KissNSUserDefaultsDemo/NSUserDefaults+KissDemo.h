@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSString *string;
 @property (nonatomic) NSInteger integer;
-@property (nonatomic) CGFloat floatValue;
+@property (nonatomic) float floatValue;
 @property (nonatomic) BOOL boolValue;
 
 @end

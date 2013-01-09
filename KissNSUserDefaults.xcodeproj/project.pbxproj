@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E015078B169D63C30061B8B1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E015078A169D63C30061B8B1 /* Cocoa.framework */; };
+		E0150795169D63C30061B8B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E0150793169D63C30061B8B1 /* InfoPlist.strings */; };
+		E0150797169D63C30061B8B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E0150796169D63C30061B8B1 /* main.m */; };
+		E015079B169D63C30061B8B1 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E0150799169D63C30061B8B1 /* Credits.rtf */; };
+		E015079E169D63C30061B8B1 /* KNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E015079D169D63C30061B8B1 /* KNAppDelegate.m */; };
+		E01507A1169D63C30061B8B1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E015079F169D63C30061B8B1 /* MainMenu.xib */; };
+		E01507A6169D66C60061B8B1 /* NSUserDefaults+KissDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = E05E8DD11692F9760009A4EF /* NSUserDefaults+KissDemo.m */; };
+		E01507A7169D69FB0061B8B1 /* NSUserDefaults+KissNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = E058E1FD1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.m */; };
 		E058E2101695BC34009A0BCE /* NSUserDefaults+KissNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = E058E1FD1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.m */; };
 		E05E8DB0169295F90009A4EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05E8DAF169295F90009A4EF /* UIKit.framework */; };
 		E05E8DB2169295F90009A4EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05E8DB1169295F90009A4EF /* Foundation.framework */; };
@@ -22,6 +30,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E0150788169D63C30061B8B1 /* OS X Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OS X Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E015078A169D63C30061B8B1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		E015078D169D63C30061B8B1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		E015078E169D63C30061B8B1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E015078F169D63C30061B8B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E0150792169D63C30061B8B1 /* OS X Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OS X Demo-Info.plist"; sourceTree = "<group>"; };
+		E0150794169D63C30061B8B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E0150796169D63C30061B8B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E0150798169D63C30061B8B1 /* OS X Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OS X Demo-Prefix.pch"; sourceTree = "<group>"; };
+		E015079A169D63C30061B8B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		E015079C169D63C30061B8B1 /* KNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNAppDelegate.h; sourceTree = "<group>"; };
+		E015079D169D63C30061B8B1 /* KNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNAppDelegate.m; sourceTree = "<group>"; };
+		E01507A0169D63C30061B8B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		E01507B4169D78CF0061B8B1 /* KissNSUserDefaults-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KissNSUserDefaults-Prefix.pch"; sourceTree = "<group>"; };
 		E058E1FC1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+KissNSUserDefaults.h"; sourceTree = SOURCE_ROOT; };
 		E058E1FD1695BAE4009A0BCE /* NSUserDefaults+KissNSUserDefaults.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+KissNSUserDefaults.m"; sourceTree = SOURCE_ROOT; };
 		E05E8DAB169295F90009A4EF /* KissNSUserDefaults.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KissNSUserDefaults.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,7 +53,6 @@
 		E05E8DB7169295F90009A4EF /* KissNSUserDefaults-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KissNSUserDefaults-Info.plist"; sourceTree = "<group>"; };
 		E05E8DB9169295F90009A4EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E05E8DBB169295F90009A4EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E05E8DBD169295F90009A4EF /* KissNSUserDefaultsDemo/KissNSUserDefaults-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KissNSUserDefaultsDemo/KissNSUserDefaults-Prefix.pch"; sourceTree = "<group>"; };
 		E05E8DBE169295F90009A4EF /* KNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNAppDelegate.h; sourceTree = "<group>"; };
 		E05E8DBF169295F90009A4EF /* KNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNAppDelegate.m; sourceTree = "<group>"; };
 		E05E8DC1169295F90009A4EF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -44,6 +65,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E0150785169D63C30061B8B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E015078B169D63C30061B8B1 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E05E8DA8169295F90009A4EF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -57,11 +86,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E015078C169D63C30061B8B1 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E015078D169D63C30061B8B1 /* AppKit.framework */,
+				E015078E169D63C30061B8B1 /* CoreData.framework */,
+				E015078F169D63C30061B8B1 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		E0150790169D63C30061B8B1 /* OS X Demo */ = {
+			isa = PBXGroup;
+			children = (
+				E015079C169D63C30061B8B1 /* KNAppDelegate.h */,
+				E015079D169D63C30061B8B1 /* KNAppDelegate.m */,
+				E015079F169D63C30061B8B1 /* MainMenu.xib */,
+				E0150791169D63C30061B8B1 /* Supporting Files */,
+			);
+			path = "OS X Demo";
+			sourceTree = "<group>";
+		};
+		E0150791169D63C30061B8B1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E0150792169D63C30061B8B1 /* OS X Demo-Info.plist */,
+				E0150793169D63C30061B8B1 /* InfoPlist.strings */,
+				E0150796169D63C30061B8B1 /* main.m */,
+				E0150798169D63C30061B8B1 /* OS X Demo-Prefix.pch */,
+				E0150799169D63C30061B8B1 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E05E8DA0169295F90009A4EF = {
 			isa = PBXGroup;
 			children = (
 				E05E8DD31692F9800009A4EF /* KissNSUserDefaults */,
 				E05E8DB5169295F90009A4EF /* KissNSUserDefaultsDemo */,
+				E0150790169D63C30061B8B1 /* OS X Demo */,
 				E05E8DAE169295F90009A4EF /* Frameworks */,
 				E05E8DAC169295F90009A4EF /* Products */,
 			);
@@ -71,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				E05E8DAB169295F90009A4EF /* KissNSUserDefaults.app */,
+				E0150788169D63C30061B8B1 /* OS X Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,6 +145,8 @@
 				E05E8DAF169295F90009A4EF /* UIKit.framework */,
 				E05E8DB1169295F90009A4EF /* Foundation.framework */,
 				E05E8DB3169295F90009A4EF /* CoreGraphics.framework */,
+				E015078A169D63C30061B8B1 /* Cocoa.framework */,
+				E015078C169D63C30061B8B1 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -104,8 +170,8 @@
 			children = (
 				E05E8DB7169295F90009A4EF /* KissNSUserDefaults-Info.plist */,
 				E05E8DB8169295F90009A4EF /* InfoPlist.strings */,
+				E01507B4169D78CF0061B8B1 /* KissNSUserDefaults-Prefix.pch */,
 				E05E8DBB169295F90009A4EF /* main.m */,
-				E05E8DBD169295F90009A4EF /* KissNSUserDefaultsDemo/KissNSUserDefaults-Prefix.pch */,
 				E05E8DC1169295F90009A4EF /* Default.png */,
 				E05E8DC3169295F90009A4EF /* Default@2x.png */,
 				E05E8DC5169295F90009A4EF /* Default-568h@2x.png */,
@@ -126,6 +192,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E0150787169D63C30061B8B1 /* OS X Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E01507A4169D63C30061B8B1 /* Build configuration list for PBXNativeTarget "OS X Demo" */;
+			buildPhases = (
+				E0150784169D63C30061B8B1 /* Sources */,
+				E0150785169D63C30061B8B1 /* Frameworks */,
+				E0150786169D63C30061B8B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OS X Demo";
+			productName = "OS X Demo";
+			productReference = E0150788169D63C30061B8B1 /* OS X Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E05E8DAA169295F90009A4EF /* KissNSUserDefaults */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E05E8DC9169295F90009A4EF /* Build configuration list for PBXNativeTarget "KissNSUserDefaults" */;
@@ -166,11 +249,22 @@
 			projectRoot = "";
 			targets = (
 				E05E8DAA169295F90009A4EF /* KissNSUserDefaults */,
+				E0150787169D63C30061B8B1 /* OS X Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E0150786169D63C30061B8B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0150795169D63C30061B8B1 /* InfoPlist.strings in Resources */,
+				E015079B169D63C30061B8B1 /* Credits.rtf in Resources */,
+				E01507A1169D63C30061B8B1 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E05E8DA9169295F90009A4EF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -185,6 +279,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E0150784169D63C30061B8B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0150797169D63C30061B8B1 /* main.m in Sources */,
+				E015079E169D63C30061B8B1 /* KNAppDelegate.m in Sources */,
+				E01507A7169D69FB0061B8B1 /* NSUserDefaults+KissNSUserDefaults.m in Sources */,
+				E01507A6169D66C60061B8B1 /* NSUserDefaults+KissDemo.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E05E8DA7169295F90009A4EF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -200,6 +305,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		E0150793169D63C30061B8B1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E0150794169D63C30061B8B1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E0150799169D63C30061B8B1 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E015079A169D63C30061B8B1 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		E015079F169D63C30061B8B1 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E01507A0169D63C30061B8B1 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		E05E8DB8169295F90009A4EF /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -211,6 +340,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E01507A2169D63C30061B8B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OS X Demo/OS X Demo-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "OS X Demo/OS X Demo-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E01507A3169D63C30061B8B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OS X Demo/OS X Demo-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "OS X Demo/OS X Demo-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		E05E8DC7169295F90009A4EF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -288,6 +460,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E01507A4169D63C30061B8B1 /* Build configuration list for PBXNativeTarget "OS X Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E01507A2169D63C30061B8B1 /* Debug */,
+				E01507A3169D63C30061B8B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E05E8DA5169295F90009A4EF /* Build configuration list for PBXProject "KissNSUserDefaults" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -4,7 +4,7 @@ Keep it simple, stupid!
 
 Directly hard code to access keys of `NSUSerDefaults` is very boring, and painful because `NSUserDefaultsDidChangeNotification` contains no `userInfo`.
 
-Make a `NSUserDefaults` category to contain some properties is a better way. And it's a bonus if we know which key has been changed.
+Make a `NSUserDefaults` category to access keys via properties is a better way. And it's a bonus if we know which key has been changed.
 
 This is what `KissNSUserDefaults` project borns to be. What you need to do is to delcare properties in header and `@dynamic` all in implementation. Run `+kiss_setup` in `+load` will generate all accessors for you. 
 

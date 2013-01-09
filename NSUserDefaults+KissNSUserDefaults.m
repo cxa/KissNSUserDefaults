@@ -49,12 +49,24 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
             // NOTE: @YES != @(YES)
             POST_NOTE(key, value ? @YES : @NO);
           });
+        } else if ([type isEqualToString:@"d"]){
+          _imp = imp_implementationWithBlock(^void(id _self, double value){
+            [_self setDouble:value forKey:key];
+            // NOTE: @YES != @(YES)
+            POST_NOTE(key, value ? @YES : @NO);
+          });
         } else if ([type isEqualToString:@"f"]){
           _imp = imp_implementationWithBlock(^void(id _self, float value){
             [_self setFloat:value forKey:key];
             POST_NOTE(key, @(value));
           });
-        } else if ([type isEqualToString:@"i"]){
+        } else if ([type isEqualToString:
+#if defined(__LP64__) && __LP64__
+                    @"q"
+#else
+                    @"i"
+#endif
+                    ]){
           _imp = imp_implementationWithBlock(^void(id _self, NSInteger value){
             [_self setInteger:value forKey:key];
             POST_NOTE(key, @(value));
@@ -76,11 +88,21 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
           _imp = imp_implementationWithBlock(^BOOL (id _self){
             return [_self boolForKey:key];
           });
+        } else if ([type isEqualToString:@"d"]){
+          _imp = imp_implementationWithBlock(^double (id _self){
+            return [_self doubleForKey:key];
+          });
         } else if ([type isEqualToString:@"f"]){
           _imp = imp_implementationWithBlock(^float (id _self){
             return [_self floatForKey:key];
           });
-        } else if ([type isEqualToString:@"i"]){
+        } else if ([type isEqualToString:
+#if defined(__LP64__) && __LP64__
+                    @"q"
+#else
+                    @"i"
+#endif
+                    ]){
           _imp = imp_implementationWithBlock(^NSInteger (id _self){
             return [_self integerForKey:key];
           });
