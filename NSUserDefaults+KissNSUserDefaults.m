@@ -16,9 +16,9 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
 #define POST_NOTE(key, value) [[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : key, KissNSUserDefaultsUserInfoObjectValue : value}]
 
 #if defined(__LP64__) && __LP64__
-#define NSINTEGER_TYEP @"q"
+#define NSINTEGER_TYPE @"q"
 #else
-#define NSINTEGER_TYEP @"i"
+#define NSINTEGER_TYPE @"i"
 #endif
 
 @implementation NSUserDefaults (KissNSUserDefaults)
@@ -66,7 +66,7 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
             [_self setFloat:value forKey:key];
             POST_NOTE(key, @(value));
           });
-        } else if ([type isEqualToString:NSINTEGER_TYEP]){
+        } else if ([type isEqualToString:NSINTEGER_TYPE]){
           _imp = imp_implementationWithBlock(^void(id _self, NSInteger value){
             [_self setInteger:value forKey:key];
             POST_NOTE(key, @(value));
@@ -96,7 +96,7 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
           _imp = imp_implementationWithBlock(^float (id _self){
             return [_self floatForKey:key];
           });
-        } else if ([type isEqualToString:NSINTEGER_TYEP]){
+        } else if ([type isEqualToString:NSINTEGER_TYPE]){
           _imp = imp_implementationWithBlock(^NSInteger (id _self){
             return [_self integerForKey:key];
           });
