@@ -28,6 +28,11 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
  */
 + (void)kiss_setup
 {
+  [self kiss_setupWithCustomKeys:nil];
+}
+
++ (void)kiss_setupWithCustomKeys:(NSDictionary *)propertyKeyPairs
+{
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     @autoreleasepool {
@@ -35,79 +40,85 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
       NSDictionary *types;
       [self kiss_getDynamicProperties:&getters types:&types];
       [getters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
-        NSMutableString *ms = [key mutableCopy];
-        [ms deleteCharactersInRange:NSMakeRange(0, 1)];
+        NSMutableString *mStr = [key mutableCopy];
+        [mStr deleteCharactersInRange:NSMakeRange(0, 1)];
         NSString *setMethod = [NSString stringWithFormat:@"set%@", [[key substringWithRange:NSMakeRange(0, 1)] uppercaseString]];
-        [ms insertString:setMethod atIndex:0];
-        [ms appendString:@":"];
-        SEL _sel = NSSelectorFromString(ms);
-        const char *_methodType = [[NSString stringWithFormat:@"v@:%@", types[key]] UTF8String];
-        IMP _imp = NULL;
+        [mStr insertString:setMethod atIndex:0];
+        [mStr appendString:@":"];
+        SEL sel = NSSelectorFromString(mStr);
+        const char *methodType = [[NSString stringWithFormat:@"v@:%@", types[key]] UTF8String];
         NSString *type = types[key];
+        NSString *userDefaultsKey = propertyKeyPairs && propertyKeyPairs[key] ? propertyKeyPairs[key] : key;
+        IMP imp = NULL;
         if ([type isEqualToString:@"@"]){
-          _imp = imp_implementationWithBlock(^void(id _self, id value){
-            [_self setObject:value forKey:key];
-            POST_NOTE(key, value);
+          imp = imp_implementationWithBlock(^void(id sender, id value){
+            [sender setObject:value forKey:userDefaultsKey];
+            POST_NOTE(userDefaultsKey, value);
           });
         } else if ([type isEqualToString:@"c"]){
-          _imp = imp_implementationWithBlock(^void(id _self, BOOL value){
-            [_self setBool:value forKey:key];
+          imp = imp_implementationWithBlock(^void(id sender, BOOL value){
+            [sender setBool:value forKey:userDefaultsKey];
             // NOTE: @YES != @(YES)
-            POST_NOTE(key, value ? @YES : @NO);
+            POST_NOTE(userDefaultsKey, value ? @YES : @NO);
           });
         } else if ([type isEqualToString:@"d"]){
-          _imp = imp_implementationWithBlock(^void(id _self, double value){
-            [_self setDouble:value forKey:key];
+          imp = imp_implementationWithBlock(^void(id sender, double value){
+            [sender setDouble:value forKey:userDefaultsKey];
             // NOTE: @YES != @(YES)
-            POST_NOTE(key, value ? @YES : @NO);
+            POST_NOTE(userDefaultsKey, value ? @YES : @NO);
           });
         } else if ([type isEqualToString:@"f"]){
-          _imp = imp_implementationWithBlock(^void(id _self, float value){
-            [_self setFloat:value forKey:key];
-            POST_NOTE(key, @(value));
+          imp = imp_implementationWithBlock(^void(id sender, float value){
+            [sender setFloat:value forKey:userDefaultsKey];
+            POST_NOTE(userDefaultsKey, @(value));
           });
         } else if ([type isEqualToString:NSINTEGER_TYPE]){
-          _imp = imp_implementationWithBlock(^void(id _self, NSInteger value){
-            [_self setInteger:value forKey:key];
-            POST_NOTE(key, @(value));
+          imp = imp_implementationWithBlock(^void(id sender, NSInteger value){
+            [sender setInteger:value forKey:userDefaultsKey];
+            POST_NOTE(userDefaultsKey, @(value));
           });
         } else {
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
         }
         
-        if (_imp)
-          class_addMethod(self, _sel, _imp, _methodType);
+        if (imp)
+          class_addMethod(self, sel, imp, methodType);
         
-        _sel = NSSelectorFromString(obj);
-        _methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
+        sel = NSSelectorFromString(obj);
+        methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
         if ([type isEqualToString:@"@"]){
-          _imp = imp_implementationWithBlock(^id (id _self){
-            return [_self objectForKey:key];
+          imp = imp_implementationWithBlock(^id (id sender){
+            return [sender objectForKey:userDefaultsKey];
           });
         } else if ([type isEqualToString:@"c"]){
-          _imp = imp_implementationWithBlock(^BOOL (id _self){
-            return [_self boolForKey:key];
+          imp = imp_implementationWithBlock(^BOOL (id sender){
+            return [sender boolForKey:userDefaultsKey];
           });
         } else if ([type isEqualToString:@"d"]){
-          _imp = imp_implementationWithBlock(^double (id _self){
-            return [_self doubleForKey:key];
+          imp = imp_implementationWithBlock(^double (id sender){
+            return [sender doubleForKey:userDefaultsKey];
           });
         } else if ([type isEqualToString:@"f"]){
-          _imp = imp_implementationWithBlock(^float (id _self){
-            return [_self floatForKey:key];
+          imp = imp_implementationWithBlock(^float (id sender){
+            return [sender floatForKey:userDefaultsKey];
           });
         } else if ([type isEqualToString:NSINTEGER_TYPE]){
-          _imp = imp_implementationWithBlock(^NSInteger (id _self){
-            return [_self integerForKey:key];
+          imp = imp_implementationWithBlock(^NSInteger (id sender){
+            return [sender integerForKey:userDefaultsKey];
           });
         } else {
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
         }
         
-        class_addMethod(self, _sel, _imp, _methodType);
+        class_addMethod(self, sel, imp, methodType);
+      }];
+      
+      [@[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        [[NSNotificationCenter defaultCenter] addObserverForName:obj object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note){
+          [[self standardUserDefaults] synchronize];
+        }];
       }];
     }
-    
   });
 }
 

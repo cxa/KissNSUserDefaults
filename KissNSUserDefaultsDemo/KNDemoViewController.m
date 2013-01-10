@@ -24,7 +24,8 @@ static NSString *cellID = @"CELLID";
 - (id)init
 {
   if (self = [super initWithStyle:UITableViewStyleGrouped]){
-    _titles = @[@".string", @".integer", @".floatValue", @".boolValue"];
+    _titles = @[@".string", @".integer", @".floatValue", @".boolValue", @".doubleValue"];
+    _userInfoStr = [NSString stringWithFormat:@".doubleValue is %f", [NSUserDefaults standardUserDefaults].doubleValue];
     typeof(self) __weak weakSelf = self;
     _observer = [[NSNotificationCenter defaultCenter] addObserverForName:KissNSUserDefaultsDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *note){
       typeof(self) restrongSelf = weakSelf;
@@ -122,6 +123,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     case 3:
       ud.boolValue = YES;
       break;
+    case 4:
+      ud.doubleValue = 10.24;
     default:
       break;
   }

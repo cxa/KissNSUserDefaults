@@ -2,47 +2,50 @@
 
 Keep it simple, stupid!
 
-Directly hard code to access keys of `NSUSerDefaults` is very boring, and painful because `NSUserDefaultsDidChangeNotification` contains no `userInfo`.
+Directly hard code to access keys of `NSUserDefaults` is very boring, and painful because `NSUserDefaultsDidChangeNotification` contains no user info.
 
-Make a `NSUserDefaults` category to access keys via properties is a better way. And it's a bonus if we know which key has been changed.
+if we can access keys via properties and listen to the specific `NSUserDefaults` key change, life must be more easier.
 
-This is what `KissNSUserDefaults` project borns to be. What you need to do is to delcare properties in header and `@dynamic` all in implementation. Run `+kiss_setup` in `+load` will generate all accessors for you. 
+This is what `KissNSUserDefaults` project borns to be. What you need to do is to declare properties in header and `@dynamic` all in implementation. Run `+kiss_setup` or `+kiss_setupWithCustomKeys:` in `+load` will generate all accessors for you. 
 
 ## Usage
 
-Add `NSUserDefaults+KissNSUserDefaults.h` and `NSUserDefaults+KissNSUserDefaults.m` to your project. Make your own `NSUserDefaults` category, import `NSUserDefaults+KissNSUserDefaults.h` and run `+kiss_setup` in your category's `+load`. 
+Add `NSUserDefaults+KissNSUserDefaults.h` and `NSUserDefaults+KissNSUserDefaults.m` to your project. Make your own `NSUserDefaults` category, import `NSUserDefaults+KissNSUserDefaults.h` and run `+kiss_setup` in your category's `+load`. If you need to transit old keys, or need to keep key and property in its own name, you can run `+kiss_setupWithCustomKeys:` with your own key-property pairs dictionary. And you can add an observer at somewhere for `KissNSUserDefaultsDidChangeNotification` which contains user info for key and value.
 
-Check `NSUserDefaults+KissDemo.(h|m)` in demo project for details. And you can add an observer for `KissNSUserDefaultsDidChangeNotification` to listen changes.
+Check demo project for details.
 
 ### `NSUserDefaults+KissDemo.h`
 
-	#import "NSUserDefaults+KissNSUserDefaults.h"
-
-	@interface NSUserDefaults (KissDemo)
-
-	// KissNSUserDefaults currently supports NSObject, NSInteger, float and BOOL types
-	@property (nonatomic, strong) NSString *string;
-	@property (nonatomic) NSInteger integer;
-	@property (nonatomic) CGFloat floatValue;
-	@property (nonatomic) BOOL boolValue;
-
-	@end
+    #import "NSUserDefaults+KissNSUserDefaults.h"
+    
+    extern NSString * const kMyCustomKey;
+    
+    @interface NSUserDefaults (KissDemo)
+    
+    @property (nonatomic, strong) NSString *string;
+    @property (nonatomic) NSInteger integer;
+    @property (nonatomic) float floatValue;
+    @property (nonatomic) BOOL boolValue;
+    @property (nonatomic) double doubleValue;
+    
+    @end
 	
 ### `NSUserDefaults+KissDemo.m`
 
-	#import "NSUserDefaults+KissDemo.h"
-
-	@implementation NSUserDefaults (KissDemo)
-	
-	// KissNSUserDefaults will generate all accessors for you
-	@dynamic string, integer, floatValue, boolValue;
-
-	+ (void)load
-	{
-  	  [self kiss_setup];
-	}
-
-	@end
+    #import "NSUserDefaults+KissDemo.h"
+    
+    NSString * const kMyCustomKey = @"im.cxa.myCustomKey";
+    
+    @implementation NSUserDefaults (KissDemo)
+    @dynamic string, integer, floatValue, boolValue, doubleValue;
+    
+    + (void)load
+    {
+      // run [self kiss_setup] if you don't need custom keys
+      [self kiss_setupWithCustomKeys:@{@"doubleValue" : kMyCustomKey}];
+    }
+    
+    @end
 		
 ## Creator
 

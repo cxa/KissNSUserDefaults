@@ -8,12 +8,14 @@
 
 #import "NSUserDefaults+KissDemo.h"
 
+NSString * const kMyCustomKey = @"im.cxa.myCustomKey";
+
 @implementation NSUserDefaults (KissDemo)
-@dynamic string, integer, floatValue, boolValue;
+@dynamic string, integer, floatValue, boolValue, doubleValue;
 
 + (void)load
 {
-  [self kiss_setup];
+  [self kiss_setupWithCustomKeys:@{@"doubleValue" : kMyCustomKey}];
 }
 
 @end

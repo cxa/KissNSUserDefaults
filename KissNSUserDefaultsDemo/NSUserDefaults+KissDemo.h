@@ -8,11 +8,14 @@
 
 #import "NSUserDefaults+KissNSUserDefaults.h"
 
+extern NSString * const kMyCustomKey;
+
 @interface NSUserDefaults (KissDemo)
 
 @property (nonatomic, strong) NSString *string;
 @property (nonatomic) NSInteger integer;
 @property (nonatomic) float floatValue;
 @property (nonatomic) BOOL boolValue;
+@property (nonatomic) double doubleValue;
 
 @end
