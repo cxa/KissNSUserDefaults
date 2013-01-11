@@ -15,13 +15,13 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
 
 #define SETTER_IMP(type, setter, userDefaultsKey, boxedValue)     \
 imp_implementationWithBlock(^void(id sender, type value){         \
-  [sender setter:value forKey:userDefaultsKey];                   \
-  [[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : userDefaultsKey, KissNSUserDefaultsUserInfoObjectValue : boxedValue}] ; \
+[sender setter:value forKey:userDefaultsKey];                     \
+[[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : userDefaultsKey, KissNSUserDefaultsUserInfoObjectValue : boxedValue}] ; \
 })
 
 #define GETTER_IMP(type, getter, userDefaultsKey)      \
 imp_implementationWithBlock(^type (id sender){         \
-  return [sender getter:userDefaultsKey];              \
+return [sender getter:userDefaultsKey];                \
 })
 
 #define POST_NOTE(key, value)
@@ -69,7 +69,7 @@ imp_implementationWithBlock(^type (id sender){         \
           imp = SETTER_IMP(float, setFloat, userDefaultsKey, @(value));
         else if ([type isEqualToString:NSINTEGER_TYPE])
           imp = SETTER_IMP(NSInteger, setInteger, userDefaultsKey, @(value));
-        else 
+        else
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
         
         SEL sel = NSSelectorFromString(mStr);
@@ -88,9 +88,9 @@ imp_implementationWithBlock(^type (id sender){         \
           imp = GETTER_IMP(NSInteger, integerForKey, userDefaultsKey);
         else
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
-       
-       sel = NSSelectorFromString(obj);
-       methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
+        
+        sel = NSSelectorFromString(obj);
+        methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
         class_addMethod(self, sel, imp, methodType);
       }];
 #if TARGET_OS_IPHONE
