@@ -13,7 +13,18 @@ NSString * const KissNSUserDefaultsDidChangeNotification = @"KissNSUserDefaultsD
 NSString * const KissNSUserDefaultsUserInfoKey = @"KissNSUserDefaultsUserInfoKey";
 NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUserInfoObjectValue";
 
-#define POST_NOTE(key, value) [[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : key, KissNSUserDefaultsUserInfoObjectValue : value}]
+#define SETTER_IMP(type, setter, userDefaultsKey, boxedValue)     \
+imp_implementationWithBlock(^void(id sender, type value){         \
+  [sender setter:value forKey:userDefaultsKey];                   \
+  [[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : userDefaultsKey, KissNSUserDefaultsUserInfoObjectValue : boxedValue}] ; \
+})
+
+#define GETTER_IMP(type, getter, userDefaultsKey)      \
+imp_implementationWithBlock(^type (id sender){         \
+  return [sender getter:userDefaultsKey];              \
+})
+
+#define POST_NOTE(key, value)
 
 #if defined(__LP64__) && __LP64__
 #define NSINTEGER_TYPE @"q"
@@ -36,84 +47,55 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     @autoreleasepool {
-      NSDictionary *getters;
+      NSDictionary *properties;
       NSDictionary *types;
-      [self kiss_getDynamicProperties:&getters types:&types];
-      [getters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
+      [self kiss_getDynamicProperties:&properties types:&types];
+      [properties enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
         NSMutableString *mStr = [key mutableCopy];
         [mStr deleteCharactersInRange:NSMakeRange(0, 1)];
         NSString *setMethod = [NSString stringWithFormat:@"set%@", [[key substringWithRange:NSMakeRange(0, 1)] uppercaseString]];
         [mStr insertString:setMethod atIndex:0];
         [mStr appendString:@":"];
-        SEL sel = NSSelectorFromString(mStr);
-        const char *methodType = [[NSString stringWithFormat:@"v@:%@", types[key]] UTF8String];
         NSString *type = types[key];
         NSString *userDefaultsKey = propertyKeyPairs && propertyKeyPairs[key] ? propertyKeyPairs[key] : key;
         IMP imp = NULL;
-        if ([type isEqualToString:@"@"]){
-          imp = imp_implementationWithBlock(^void(id sender, id value){
-            [sender setObject:value forKey:userDefaultsKey];
-            POST_NOTE(userDefaultsKey, value);
-          });
-        } else if ([type isEqualToString:@"c"]){
-          imp = imp_implementationWithBlock(^void(id sender, BOOL value){
-            [sender setBool:value forKey:userDefaultsKey];
-            // NOTE: @YES != @(YES)
-            POST_NOTE(userDefaultsKey, value ? @YES : @NO);
-          });
-        } else if ([type isEqualToString:@"d"]){
-          imp = imp_implementationWithBlock(^void(id sender, double value){
-            [sender setDouble:value forKey:userDefaultsKey];
-            // NOTE: @YES != @(YES)
-            POST_NOTE(userDefaultsKey, value ? @YES : @NO);
-          });
-        } else if ([type isEqualToString:@"f"]){
-          imp = imp_implementationWithBlock(^void(id sender, float value){
-            [sender setFloat:value forKey:userDefaultsKey];
-            POST_NOTE(userDefaultsKey, @(value));
-          });
-        } else if ([type isEqualToString:NSINTEGER_TYPE]){
-          imp = imp_implementationWithBlock(^void(id sender, NSInteger value){
-            [sender setInteger:value forKey:userDefaultsKey];
-            POST_NOTE(userDefaultsKey, @(value));
-          });
-        } else {
+        if ([type isEqualToString:@"@"])
+          imp = SETTER_IMP(id, setObject, userDefaultsKey, value);
+        else if ([type isEqualToString:@"c"])
+          imp = SETTER_IMP(BOOL, setBool, userDefaultsKey, (value ? @YES : @NO));
+        else if ([type isEqualToString:@"d"])
+          imp = SETTER_IMP(double, setDouble, userDefaultsKey, @(value));
+        else if ([type isEqualToString:@"f"])
+          imp = SETTER_IMP(float, setFloat, userDefaultsKey, @(value));
+        else if ([type isEqualToString:NSINTEGER_TYPE])
+          imp = SETTER_IMP(NSInteger, setInteger, userDefaultsKey, @(value));
+        else 
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
-        }
         
-        if (imp)
-          class_addMethod(self, sel, imp, methodType);
+        SEL sel = NSSelectorFromString(mStr);
+        const char *methodType = [[NSString stringWithFormat:@"v@:%@", types[key]] UTF8String];
+        class_addMethod(self, sel, imp, methodType);
         
-        sel = NSSelectorFromString(obj);
-        methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
-        if ([type isEqualToString:@"@"]){
-          imp = imp_implementationWithBlock(^id (id sender){
-            return [sender objectForKey:userDefaultsKey];
-          });
-        } else if ([type isEqualToString:@"c"]){
-          imp = imp_implementationWithBlock(^BOOL (id sender){
-            return [sender boolForKey:userDefaultsKey];
-          });
-        } else if ([type isEqualToString:@"d"]){
-          imp = imp_implementationWithBlock(^double (id sender){
-            return [sender doubleForKey:userDefaultsKey];
-          });
-        } else if ([type isEqualToString:@"f"]){
-          imp = imp_implementationWithBlock(^float (id sender){
-            return [sender floatForKey:userDefaultsKey];
-          });
-        } else if ([type isEqualToString:NSINTEGER_TYPE]){
-          imp = imp_implementationWithBlock(^NSInteger (id sender){
-            return [sender integerForKey:userDefaultsKey];
-          });
-        } else {
+        if ([type isEqualToString:@"@"])
+          imp = GETTER_IMP(id, objectForKey, userDefaultsKey);
+        else if ([type isEqualToString:@"c"])
+          imp = GETTER_IMP(BOOL, boolForKey, userDefaultsKey);
+        else if ([type isEqualToString:@"d"])
+          imp = GETTER_IMP(double, doubleForKey, userDefaultsKey);
+        else if ([type isEqualToString:@"f"])
+          imp = GETTER_IMP(float, floatForKey, userDefaultsKey);
+        else if ([type isEqualToString:NSINTEGER_TYPE])
+          imp = GETTER_IMP(NSInteger, integerForKey, userDefaultsKey);
+        else
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
-        }
-        
+       
+       sel = NSSelectorFromString(obj);
+       methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
         class_addMethod(self, sel, imp, methodType);
       }];
       
-      [@[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+      NSArray *notes = @[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification];
+      [notes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
         [[NSNotificationCenter defaultCenter] addObserverForName:obj object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note){
           [[self standardUserDefaults] synchronize];
         }];
@@ -122,39 +104,35 @@ NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUse
   });
 }
 
-+ (void)kiss_getDynamicProperties:(NSDictionary **)outGetters
++ (void)kiss_getDynamicProperties:(NSDictionary **)outProperties
                             types:(NSDictionary **)outTypes
 {
-  NSMutableArray *properties = [@[] mutableCopy];
-  NSMutableDictionary *getters = [@{} mutableCopy];
+  NSMutableDictionary *properties = [@{} mutableCopy];
   NSMutableDictionary *types = [@{} mutableCopy];
   unsigned int outCount, i;
   objc_property_t *classProperties = class_copyPropertyList([self class], &outCount);
   for (i=0; i<outCount; i++){
     objc_property_t property = classProperties[i];
-    const char *propName = property_getName(property);
-    if (propName){
+    const char *propChar = property_getName(property);
+    if (propChar){
       const char *attr = property_getAttributes(property);
-      if (strstr(attr, "D,")){
-        NSString *propertyName = [NSString stringWithUTF8String:propName];
-        [properties addObject:propertyName];
+      if (strstr(attr, "D,")){ // only interests in dynamic property
+        NSString *propName = [NSString stringWithUTF8String:propChar];
+        char *getterPtr = NULL;
+        if ((getterPtr = strstr(attr, ",G"))){ // if it is a custom getter
+          NSString *getterName = [[NSString stringWithUTF8String:getterPtr] substringFromIndex:2];
+          properties[propName] = getterName;
+        } else {
+          properties[propName] = propName;
+        }
+        
+        types[propName] = [[NSString stringWithUTF8String:attr] substringWithRange:NSMakeRange(1, 1)];
       }
-      
-      NSString *p = [NSString stringWithCString:propName encoding:NSUTF8StringEncoding];
-      char *strptr = NULL;
-      if ((strptr = strstr(attr, ",G"))){
-        NSString *g = [[NSString stringWithCString:strptr encoding:NSUTF8StringEncoding] substringFromIndex:2];
-        getters[p] = g;
-      } else {
-        getters[p] = p;
-      }
-      
-      types[p] = [[NSString stringWithCString:attr encoding:NSUTF8StringEncoding] substringWithRange:NSMakeRange(1, 1)];
     }
   }
   
   free(classProperties);
-  *outGetters = [getters copy];
+  *outProperties = [properties copy];
   *outTypes = [types copy];
 }
 

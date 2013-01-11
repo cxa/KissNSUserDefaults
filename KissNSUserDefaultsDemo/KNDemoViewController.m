@@ -25,7 +25,7 @@ static NSString *cellID = @"CELLID";
 {
   if (self = [super initWithStyle:UITableViewStyleGrouped]){
     _titles = @[@".string", @".integer", @".floatValue", @".boolValue", @".doubleValue"];
-    _userInfoStr = [NSString stringWithFormat:@".doubleValue is %f", [NSUserDefaults standardUserDefaults].doubleValue];
+    _userInfoStr = [NSString stringWithFormat:@".doubleValue is %f, .boolValue via custom getter .isBoolValue is %d", [NSUserDefaults standardUserDefaults].doubleValue, [NSUserDefaults standardUserDefaults].isBoolValue];
     typeof(self) __weak weakSelf = self;
     _observer = [[NSNotificationCenter defaultCenter] addObserverForName:KissNSUserDefaultsDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification *note){
       typeof(self) restrongSelf = weakSelf;
