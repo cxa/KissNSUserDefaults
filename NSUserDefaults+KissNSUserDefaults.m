@@ -93,8 +93,11 @@ imp_implementationWithBlock(^type (id sender){         \
        methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
         class_addMethod(self, sel, imp, methodType);
       }];
-      
+#if TARGET_OS_IPHONE
       NSArray *notes = @[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification];
+#else
+      NSArray *notes = @[NSApplicationWillTerminateNotification, NSApplicationWillResignActiveNotification];
+#endif
       [notes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
         [[NSNotificationCenter defaultCenter] addObserverForName:obj object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note){
           [[self standardUserDefaults] synchronize];
