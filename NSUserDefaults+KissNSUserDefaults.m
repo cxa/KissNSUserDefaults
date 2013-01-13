@@ -94,15 +94,23 @@ return [sender getter:userDefaultsKey];                \
         class_addMethod(self, sel, imp, methodType);
       }];
 #if TARGET_OS_IPHONE
+#ifdef UIKIT_EXTERN
       NSArray *notes = @[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification];
-#else
-      NSArray *notes = @[NSApplicationWillTerminateNotification, NSApplicationWillResignActiveNotification];
+#define hasNotes
 #endif
+#else
+#ifdef _APPKITDEFINES_H
+      NSArray *notes = @[NSApplicationWillTerminateNotification, NSApplicationWillResignActiveNotification];
+#define hasNotes
+#endif
+#endif
+#ifdef hasNotes
       [notes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
         [[NSNotificationCenter defaultCenter] addObserverForName:obj object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note){
           [[self standardUserDefaults] synchronize];
         }];
       }];
+#endif
     }
   });
 }
