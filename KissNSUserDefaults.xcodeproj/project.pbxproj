@@ -233,7 +233,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = KN;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = lazyapps;
 			};
 			buildConfigurationList = E05E8DA5169295F90009A4EF /* Build configuration list for PBXProject "KissNSUserDefaults" */;
@@ -343,7 +343,6 @@
 		E01507A2169D63C30061B8B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -364,7 +363,6 @@
 		E01507A3169D63C30061B8B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -438,6 +436,7 @@
 		E05E8DCA169295F90009A4EF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KissNSUserDefaultsDemo/KissNSUserDefaults-Prefix.pch";
 				INFOPLIST_FILE = "KissNSUserDefaultsDemo/KissNSUserDefaults-Info.plist";
@@ -449,6 +448,7 @@
 		E05E8DCB169295F90009A4EF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KissNSUserDefaults/KissNSUserDefaults-Prefix.pch";
 				INFOPLIST_FILE = "KissNSUserDefaultsDemo/KissNSUserDefaults-Info.plist";

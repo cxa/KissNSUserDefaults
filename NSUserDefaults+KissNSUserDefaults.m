@@ -24,12 +24,16 @@ imp_implementationWithBlock(^type (id sender){         \
 return [sender getter:userDefaultsKey];                \
 })
 
-#define POST_NOTE(key, value)
-
 #if defined(__LP64__) && __LP64__
-#define NSINTEGER_TYPE @"q"
+#define KISS_NSINTEGER_TYPE @"q"
 #else
-#define NSINTEGER_TYPE @"i"
+#define KISS_NSINTEGER_TYPE @"i"
+#endif
+
+#if !defined(OBJC_HIDE_64) && TARGET_OS_IPHONE && __LP64__
+#define KISS_BOOL_TYPE @"B"
+#else
+#define KISS_BOOL_TYPE @"c"
 #endif
 
 @implementation NSUserDefaults (KissNSUserDefaults)
@@ -50,7 +54,8 @@ return [sender getter:userDefaultsKey];                \
       NSDictionary *properties;
       NSDictionary *types;
       [self kiss_getDynamicProperties:&properties types:&types];
-      [properties enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
+      for (id key in properties){
+        id obj = properties[key];
         NSMutableString *mStr = [key mutableCopy];
         [mStr deleteCharactersInRange:NSMakeRange(0, 1)];
         NSString *setMethod = [NSString stringWithFormat:@"set%@", [[key substringWithRange:NSMakeRange(0, 1)] uppercaseString]];
@@ -61,13 +66,13 @@ return [sender getter:userDefaultsKey];                \
         IMP imp = NULL;
         if ([type isEqualToString:@"@"])
           imp = SETTER_IMP(id, setObject, userDefaultsKey, value);
-        else if ([type isEqualToString:@"c"])
+        else if ([type isEqualToString:KISS_BOOL_TYPE])
           imp = SETTER_IMP(BOOL, setBool, userDefaultsKey, (value ? @YES : @NO));
         else if ([type isEqualToString:@"d"])
           imp = SETTER_IMP(double, setDouble, userDefaultsKey, @(value));
         else if ([type isEqualToString:@"f"])
           imp = SETTER_IMP(float, setFloat, userDefaultsKey, @(value));
-        else if ([type isEqualToString:NSINTEGER_TYPE])
+        else if ([type isEqualToString:KISS_NSINTEGER_TYPE])
           imp = SETTER_IMP(NSInteger, setInteger, userDefaultsKey, @(value));
         else
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
@@ -78,13 +83,13 @@ return [sender getter:userDefaultsKey];                \
         
         if ([type isEqualToString:@"@"])
           imp = GETTER_IMP(id, objectForKey, userDefaultsKey);
-        else if ([type isEqualToString:@"c"])
+        else if ([type isEqualToString:KISS_BOOL_TYPE])
           imp = GETTER_IMP(BOOL, boolForKey, userDefaultsKey);
         else if ([type isEqualToString:@"d"])
           imp = GETTER_IMP(double, doubleForKey, userDefaultsKey);
         else if ([type isEqualToString:@"f"])
           imp = GETTER_IMP(float, floatForKey, userDefaultsKey);
-        else if ([type isEqualToString:NSINTEGER_TYPE])
+        else if ([type isEqualToString:KISS_NSINTEGER_TYPE])
           imp = GETTER_IMP(NSInteger, integerForKey, userDefaultsKey);
         else
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
@@ -92,7 +97,7 @@ return [sender getter:userDefaultsKey];                \
         sel = NSSelectorFromString(obj);
         methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
         class_addMethod(self, sel, imp, methodType);
-      }];
+      }
 #if TARGET_OS_IPHONE
 #ifdef UIKIT_EXTERN
       NSArray *notes = @[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification];
