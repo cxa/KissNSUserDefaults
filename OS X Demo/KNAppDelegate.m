@@ -31,7 +31,7 @@
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   switch ([sender tag]){
     case 0:
-      ud.string = @"Bla bla...";
+      ud.kiss_string = @"Bla bla...";
       break;
     case 1:
       ud.integer = 1024;

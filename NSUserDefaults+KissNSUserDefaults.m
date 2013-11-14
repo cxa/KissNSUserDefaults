@@ -51,16 +51,22 @@ return [sender getter:userDefaultsKey];                \
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     @autoreleasepool {
-      NSDictionary *properties;
+      NSDictionary *getters;
+      NSDictionary *setters;
       NSDictionary *types;
-      [self kiss_getDynamicProperties:&properties types:&types];
-      for (id key in properties){
-        id obj = properties[key];
-        NSMutableString *mStr = [key mutableCopy];
-        [mStr deleteCharactersInRange:NSMakeRange(0, 1)];
-        NSString *setMethod = [NSString stringWithFormat:@"set%@", [[key substringWithRange:NSMakeRange(0, 1)] uppercaseString]];
-        [mStr insertString:setMethod atIndex:0];
-        [mStr appendString:@":"];
+      [self kiss_getDynamicGetters:&getters setters:&setters types:&types];
+      for (id key in getters){
+        NSString *getterName = getters[key];
+        NSString *setterName = setters[key];
+        if (!setterName){
+          NSMutableString *mStr = [key mutableCopy];
+          [mStr deleteCharactersInRange:NSMakeRange(0, 1)];
+          NSString *part = [NSString stringWithFormat:@"set%@", [[key substringWithRange:NSMakeRange(0, 1)] uppercaseString]];
+          [mStr insertString:part atIndex:0];
+          [mStr appendString:@":"];
+          setterName = mStr;
+        }
+        
         NSString *type = types[key];
         NSString *userDefaultsKey = propertyKeyPairs && propertyKeyPairs[key] ? propertyKeyPairs[key] : key;
         IMP imp = NULL;
@@ -77,7 +83,7 @@ return [sender getter:userDefaultsKey];                \
         else
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
         
-        SEL sel = NSSelectorFromString(mStr);
+        SEL sel = NSSelectorFromString(setterName);
         const char *methodType = [[NSString stringWithFormat:@"v@:%@", types[key]] UTF8String];
         class_addMethod(self, sel, imp, methodType);
         
@@ -94,7 +100,7 @@ return [sender getter:userDefaultsKey];                \
         else
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
         
-        sel = NSSelectorFromString(obj);
+        sel = NSSelectorFromString(getterName);
         methodType = [[NSString stringWithFormat:@"%@@:", types[key]] UTF8String];
         class_addMethod(self, sel, imp, methodType);
       }
@@ -120,11 +126,22 @@ return [sender getter:userDefaultsKey];                \
   });
 }
 
-+ (void)kiss_getDynamicProperties:(NSDictionary **)outProperties
-                            types:(NSDictionary **)outTypes
++ (NSString *)kiss_getAccessorName:(NSString *)accessor
 {
-  NSMutableDictionary *properties = [@{} mutableCopy];
-  NSMutableDictionary *types = [@{} mutableCopy];
+  NSRange r = NSMakeRange(2, [accessor length]-2);
+  if ((r = [accessor rangeOfString:@"," options:0 range:r]).location != NSNotFound)
+    return [accessor substringWithRange:NSMakeRange(2, r.location-2)];
+  
+  return [accessor substringFromIndex:2];
+}
+
++ (void)kiss_getDynamicGetters:(NSDictionary **)outGetters
+                       setters:(NSDictionary **)outSetters
+                         types:(NSDictionary **)outTypes
+{
+  NSMutableDictionary *getters = [NSMutableDictionary dictionary];
+  NSMutableDictionary *setters = [NSMutableDictionary dictionary];
+  NSMutableDictionary *types = [NSMutableDictionary dictionary];
   unsigned int outCount, i;
   objc_property_t *classProperties = class_copyPropertyList([self class], &outCount);
   for (i=0; i<outCount; i++){
@@ -134,13 +151,14 @@ return [sender getter:userDefaultsKey];                \
       const char *attr = property_getAttributes(property);
       if (strstr(attr, "D,")){ // only interests in dynamic property
         NSString *propName = [NSString stringWithUTF8String:propChar];
-        char *getterPtr = NULL;
-        if ((getterPtr = strstr(attr, ",G"))){ // if it is a custom getter
-          NSString *getterName = [[NSString stringWithUTF8String:getterPtr] substringFromIndex:2];
-          properties[propName] = getterName;
-        } else {
-          properties[propName] = propName;
-        }
+        char *subAttr = NULL;
+        if ((subAttr = strstr(attr, ",G"))) // handle custom getter
+          getters[propName] = [self kiss_getAccessorName:[NSString stringWithUTF8String:subAttr]];
+        else
+          getters[propName] = propName;
+        
+        if ((subAttr = strstr(attr, ",S"))) // handle custom setter
+          setters[propName] = [self kiss_getAccessorName:[NSString stringWithUTF8String:subAttr]];
         
         types[propName] = [[NSString stringWithUTF8String:attr] substringWithRange:NSMakeRange(1, 1)];
       }
@@ -148,8 +166,9 @@ return [sender getter:userDefaultsKey];                \
   }
   
   free(classProperties);
-  *outProperties = [properties copy];
-  *outTypes = [types copy];
+  *outGetters = getters;
+  *outSetters = [setters count] ? setters : nil;
+  *outTypes = types;
 }
 
 @end

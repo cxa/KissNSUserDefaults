@@ -12,10 +12,10 @@ extern NSString * const kMyCustomKey;
 
 @interface NSUserDefaults (KissDemo)
 
-@property (nonatomic, strong) NSString *string;
+@property (nonatomic, strong, setter = kiss_setString:) NSString *kiss_string;
 @property (nonatomic) NSInteger integer;
 @property (nonatomic) float floatValue;
-@property (nonatomic, getter = isBoolValue) BOOL boolValue;
+@property (nonatomic, getter = isBoolValue, setter = kiss_setBoolValue:) BOOL boolValue;
 @property (nonatomic) double doubleValue;
 
 @end

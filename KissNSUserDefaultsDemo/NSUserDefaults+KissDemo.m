@@ -11,7 +11,7 @@
 NSString * const kMyCustomKey = @"im.cxa.myCustomKey";
 
 @implementation NSUserDefaults (KissDemo)
-@dynamic string, integer, floatValue, boolValue, doubleValue;
+@dynamic kiss_string, integer, floatValue, boolValue, doubleValue;
 
 + (void)load
 {
