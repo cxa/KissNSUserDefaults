@@ -13,10 +13,14 @@ NSString * const KissNSUserDefaultsDidChangeNotification = @"KissNSUserDefaultsD
 NSString * const KissNSUserDefaultsUserInfoKey = @"KissNSUserDefaultsUserInfoKey";
 NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUserInfoObjectValue";
 
-#define SETTER_IMP(type, setter, userDefaultsKey, boxedValue)     \
-imp_implementationWithBlock(^void(id sender, type value){         \
-[sender setter:value forKey:userDefaultsKey];                     \
-[[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : userDefaultsKey, KissNSUserDefaultsUserInfoObjectValue : boxedValue}] ; \
+#define SETTER_IMP(type, setter, userDefaultsKey, boxedValue)  \
+imp_implementationWithBlock(^void(id sender, type value){      \
+  if (boxedValue){                                             \
+    [sender setter:value forKey:userDefaultsKey];         \
+  } else {                                                     \
+    [sender removeObjectForKey:userDefaultsKey];               \
+  }                                                            \
+  [[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : userDefaultsKey, KissNSUserDefaultsUserInfoObjectValue : boxedValue ?: [NSNull null]}] ;\
 })
 
 #define GETTER_IMP(type, getter, userDefaultsKey)      \
