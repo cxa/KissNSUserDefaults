@@ -13,15 +13,21 @@ NSString * const KissNSUserDefaultsDidChangeNotification = @"KissNSUserDefaultsD
 NSString * const KissNSUserDefaultsUserInfoKey = @"KissNSUserDefaultsUserInfoKey";
 NSString * const KissNSUserDefaultsUserInfoObjectValue = @"KissNSUserDefaultsUserInfoObjectValue";
 
-#define SETTER_IMP(type, setter, userDefaultsKey, boxedValue)  \
+#define SETTER_OBJ_IMP(type, setter, userDefaultsKey, value)   \
 imp_implementationWithBlock(^void(id sender, type value){      \
-  if (boxedValue){                                             \
-    [sender setter:value forKey:userDefaultsKey];         \
+  if (value){                                                  \
+    [sender setter:value forKey:userDefaultsKey];              \
   } else {                                                     \
     [sender removeObjectForKey:userDefaultsKey];               \
   }                                                            \
-  [[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : userDefaultsKey, KissNSUserDefaultsUserInfoObjectValue : boxedValue ?: [NSNull null]}] ;\
+  [[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : userDefaultsKey, KissNSUserDefaultsUserInfoObjectValue : value ?: [NSNull null]}] ;\
 })
+
+#define SETTER_IMP(type, setter, userDefaultsKey, value)      \
+imp_implementationWithBlock(^void(id sender, type value){      \
+  [sender setter:value forKey:userDefaultsKey];                \
+  [[NSNotificationCenter defaultCenter] postNotificationName:KissNSUserDefaultsDidChangeNotification object:nil userInfo:@{KissNSUserDefaultsUserInfoKey : userDefaultsKey, KissNSUserDefaultsUserInfoObjectValue : @(value) ?: [NSNull null]}] ;\
+  })
 
 #define GETTER_IMP(type, getter, userDefaultsKey)      \
 imp_implementationWithBlock(^type (id sender){         \
@@ -75,15 +81,15 @@ return [sender getter:userDefaultsKey];                \
         NSString *userDefaultsKey = propertyKeyPairs && propertyKeyPairs[key] ? propertyKeyPairs[key] : key;
         IMP imp = NULL;
         if ([type isEqualToString:@"@"])
-          imp = SETTER_IMP(id, setObject, userDefaultsKey, value);
+          imp = SETTER_OBJ_IMP(id, setObject, userDefaultsKey, value);
         else if ([type isEqualToString:KISS_BOOL_TYPE])
-          imp = SETTER_IMP(BOOL, setBool, userDefaultsKey, (value ? @YES : @NO));
+          imp = SETTER_IMP(BOOL, setBool, userDefaultsKey, value);
         else if ([type isEqualToString:@"d"])
-          imp = SETTER_IMP(double, setDouble, userDefaultsKey, @(value));
+          imp = SETTER_IMP(double, setDouble, userDefaultsKey, value);
         else if ([type isEqualToString:@"f"])
-          imp = SETTER_IMP(float, setFloat, userDefaultsKey, @(value));
+          imp = SETTER_IMP(float, setFloat, userDefaultsKey, value);
         else if ([type isEqualToString:KISS_NSINTEGER_TYPE])
-          imp = SETTER_IMP(NSInteger, setInteger, userDefaultsKey, @(value));
+          imp = SETTER_IMP(NSInteger, setInteger, userDefaultsKey, value);
         else
           @throw [NSException exceptionWithName:@"KissNSUserDefaults" reason:[NSString stringWithFormat:@"type %@ hasn't implemented yet", type] userInfo:nil];
         
